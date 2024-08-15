@@ -5,7 +5,6 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "@/components/ui/menubar";
-import { COMICS } from "@consumet/extensions";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
@@ -22,22 +21,26 @@ export default async function Component() {
   const comicData: Array<{ title: string; issue: string; imageUrl: string }> =
     [];
   const comicList = root.querySelector(".item-list");
-  const comics = comicList.querySelectorAll(".section.group.list");
+  if (comicList) {
+    const comics = comicList.querySelectorAll(".section.group.list");
 
-  comics.forEach((comic) => {
-    const titleElement = comic.querySelector(".col.info p a");
-    const title = titleElement ? titleElement.text : "No title";
+    comics.forEach((comic) => {
+      const titleElement = comic.querySelector(".col.info p a");
+      const title = titleElement ? titleElement.text : "No title";
 
-    const issueElement = comic.querySelector(".col.info p:nth-child(2)");
-    const issue = issueElement ? issueElement.text.trim() : "No issue info";
+      const issueElement = comic.querySelector(".col.info p:nth-child(2)");
+      const issue = issueElement ? issueElement.text.trim() : "No issue info";
 
-    const imageElement = comic.querySelector(".col.cover img");
-    let imageUrl = imageElement ? imageElement.getAttribute("src") : "No image";
-    if (imageUrl.includes("/Uploads/Etc")) {
-      imageUrl = "https://readcomiconline.li" + imageUrl;
-    }
-    comicData.push({ title, issue, imageUrl });
-  });
+      const imageElement = comic.querySelector(".col.cover img");
+      let imageUrl = imageElement
+        ? imageElement.getAttribute("src")!
+        : "No image";
+      if (imageUrl.includes("/Uploads/Etc")) {
+        imageUrl = "https://readcomiconline.li" + imageUrl;
+      }
+      comicData.push({ title, issue, imageUrl });
+    });
+  }
   console.log(comicData);
   // if (postListPosts) {
   //   // Find all article elements within post-list-posts
