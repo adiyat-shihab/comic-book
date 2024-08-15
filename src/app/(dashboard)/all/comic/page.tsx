@@ -5,6 +5,8 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "@/components/ui/menubar";
+import * as cheerio from "cheerio";
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,12 +14,19 @@ import axios from "axios";
 import parse from "node-html-parser";
 
 export default async function Component() {
-  // const comicss = new COMICS.GetComics();
-  // const comicDataB = await comicss.search("marvel");
-  const rcoFetch = await axios.get(
+  const url = "https://readcomiconline.li/ComicList/MostPopular";
+  const rcoFetchB = await axios.get(
     "https://readcomiconline.li/ComicList/MostPopular",
   );
-  const root = parse(rcoFetch.data);
+  const apikey = "ec712a2d01a203ac5539801d92ce113f492dd9f1";
+
+  const $ = await cheerio.fromURL(
+    "https://readcomiconline.li/ComicList/MostPopular",
+  );
+  const rcoFetch = $.html();
+  console.log(rcoFetch);
+
+  const root = parse(rcoFetch);
   const comicData: Array<{ title: string; issue: string; imageUrl: string }> =
     [];
   const comicList = root.querySelector(".item-list");
