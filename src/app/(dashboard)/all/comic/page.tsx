@@ -15,9 +15,9 @@ import parse from "node-html-parser";
 
 export default async function Component() {
   const url = "https://readcomiconline.li/ComicList/MostPopular";
-  const rcoFetchB = await axios.get(
-    "https://readcomiconline.li/ComicList/MostPopular",
-  );
+  // const rcoFetchB = await axios.get(
+  //   "https://readcomiconline.li/ComicList/MostPopular",
+  // );
   const apikey = "ec712a2d01a203ac5539801d92ce113f492dd9f1";
 
   const $ = await cheerio.fromURL(
