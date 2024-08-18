@@ -7,6 +7,9 @@ const nextConfig = {images: {
             },  {
                 protocol: 'https',
                 hostname: 'readcomiconline.li',
+            },{
+                protocol: 'https',
+                hostname: 'readcomicsonline.ru',
             },
         ],
     },};
