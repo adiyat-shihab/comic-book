@@ -27,7 +27,14 @@ export default async function Component() {
   //     apikey: process.env.ZENROWKEY,
   //   },
   // });
-  const fetchR = await axios.get(urlR);
+  const params = {
+    headers: {
+      "User-Agent":
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
+    },
+  };
+
+  const fetchR = await axios.get(urlR, params);
   const rootR = parse(fetchR.data);
   const contentDiv = rootR.querySelector(".content");
   const mediaDivs = contentDiv.querySelectorAll(".media");
